@@ -1,16 +1,19 @@
-name: Run Java Program
+name: Java with Docker
 on:
   push:
     branches: [ main ]
   pull_request:
+  
 jobs:
-  run-java:
+  build-with-docker:
     runs-on: ubuntu-latest
-steps:
-  - uses: actions/checkout@v4
-  - uses: actions/setup-java@v4
-    with:
-      distribution: temurin
-      java-version: '17'
-    - run: javac Hello.java
-  - run: java Hello
+    
+    steps:    
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Build Docker image
+        run: docker build -t java-docker-demo .
+        
+      - name: Run Docker container
+        run: docker run java-docker-demo
