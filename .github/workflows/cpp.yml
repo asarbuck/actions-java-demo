@@ -1,0 +1,14 @@
+name: Run C++ with Docker
+on:
+  push:
+  pull_request:
+jobs:
+  build-cpp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t cpp-demo .
+      - name: Run Docker container
+        run: docker run cpp-demo
